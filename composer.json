@@ -1,0 +1,76 @@
+{
+  "name": "yassinedoghri/codeigniter-altcha",
+  "description": "A CodeIgniter4 library for ALTCHA, a GDPR, WCAG 2.2 AA, and EAA compliant, self-hosted CAPTCHA alternative with PoW mechanism.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "codeigniter",
+    "codeigniter4",
+    "altcha",
+    "captcha",
+    "privacy"
+  ],
+  "authors": [
+    {
+      "name": "Yassine Doghri",
+      "homepage": "https://yassinedoghri.com/"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "CodeIgniterAltcha\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "dev": "php spark serve --host 0.0.0.0",
+    "phpstan": "vendor/bin/phpstan analyse --ansi",
+    "rector": "vendor/bin/rector process --dry-run --ansi",
+    "rector:fix": "vendor/bin/rector process --ansi",
+    "style": "vendor/bin/ecs check --ansi",
+    "style:fix": "vendor/bin/ecs check --fix --ansi",
+    "pest": "./vendor/bin/pest --bail --colors=always",
+    "pest:parallel": "./vendor/bin/pest --colors=always --parallel",
+    "pest:profiling": "./vendor/bin/pest --colors=always --profile",
+    "pest:coverage": "./vendor/bin/pest --colors=always --parallel --coverage",
+    "pest:type-coverage": "./vendor/bin/pest --colors=always --type-coverage --min=95",
+    "test": [
+      "@style",
+      "@phpstan",
+      "@rector",
+      "@pest:type-coverage",
+      "@pest:parallel"
+    ],
+    "core:update": [
+      "composer update --no-interaction --prefer-stable",
+      "composer bump --ansi",
+      "composer validate --strict --ansi",
+      "composer audit --ansi"
+    ]
+  },
+  "require": {
+    "php": ">=8.2",
+    "altcha-org/altcha": "^1.1"
+  },
+  "require-dev": {
+    "codeigniter/phpstan-codeigniter": "^1.5.4",
+    "codeigniter4/framework": "^v4.6.0",
+    "phpstan/extension-installer": "^1.4.3",
+    "phpstan/phpstan": "^2.1.22",
+    "rector/rector": "^2.1.4",
+    "symplify/coding-standard": "^12.4.3",
+    "symplify/easy-coding-standard": "^12.5.24",
+    "pestphp/pest": "^3.8.4",
+    "pestphp/pest-plugin-type-coverage": "^3.6.1"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "phpstan/extension-installer": true
+    }
+  }
+}

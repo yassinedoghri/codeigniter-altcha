@@ -1,0 +1,97 @@
+<?php
+
+declare(strict_types=1);
+
+namespace CodeIgniterAltcha\Config;
+
+use CodeIgniter\Config\BaseConfig;
+
+class Altcha extends BaseConfig
+{
+    public bool $active = true;
+
+    /**
+     * --------------------------------------------------------------------------
+     * ALTCHA filter excluded paths
+     * --------------------------------------------------------------------------
+     *
+     * Defines URI paths that should be ignored by the ALTCHA verification filter.
+     * Any request matching one of these patterns will bypass ALTCHA checks.
+     *
+     * Paths can be defined in two ways:
+     *   - As regular expressions.
+     *   - Using an asterisk (*) as a wildcard, which matches any characters
+     *     that follow. For example: 'api/*' excludes all routes under /api/.
+     *
+     *  Example:
+     *   ['api/*', 'health', '#^/internal/.*$#']
+     *
+     * @var list<string>
+     */
+    public array $filterExcludedPaths = [];
+
+    /**
+     * --------------------------------------------------------------------------
+     * Altcha HMAC secret key
+     * --------------------------------------------------------------------------
+     *
+     * Secret key used for ALTCHA HMAC operations such as challenge signing.
+     * Must be at least 24 characters long.
+     */
+    public string $hmacKey = '';
+
+    /**
+     * --------------------------------------------------------------------------
+     * Altcha automatically generated HMAC secret key
+     * --------------------------------------------------------------------------
+     *
+     * Use the cache to generate and store the HMAC secret automatically.
+     * If cache driver is set to dummy, the $hmacKey will be used instead.
+     */
+    public bool $autoGenerateHMAC = true;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Altcha HMAC cache duration
+     * --------------------------------------------------------------------------
+     *
+     * Number of seconds HMAC secret key should be kept in cache.
+     */
+    public int $hmacKeyTTL = DAY;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Altcha Redirect
+     * --------------------------------------------------------------------------
+     *
+     * Redirect to previous page with error on failure.
+     */
+    public bool $redirect = (ENVIRONMENT === 'production');
+
+    /**
+     * --------------------------------------------------------------------------
+     * Altcha challenge algorithm
+     * --------------------------------------------------------------------------
+     *
+     * @see https://altcha.org/docs/v2/complexity/
+     */
+    public ?string $challengeAlgorithm = null;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Altcha challenge max number
+     * --------------------------------------------------------------------------
+     *
+     * @see https://altcha.org/docs/v2/complexity/
+     */
+    public ?int $challengeMaxNumber = null;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Altcha challenge expires
+     * --------------------------------------------------------------------------
+     *
+     * @see https://altcha.org/docs/v2/complexity/
+     */
+    public int $challengeExpires = 10;
+}

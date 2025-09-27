@@ -1,0 +1,35 @@
+{
+  "name": "codeigniter-altcha",
+  "version": "0.0.0-development",
+  "description": "A CodeIgniter4 library for ALTCHA, a GDPR, WCAG 2.2 AA, and EAA compliant, self-hosted CAPTCHA alternative with PoW mechanism.",
+  "license": "MIT",
+  "private": true,
+  "author": {
+    "name": "Yassine Doghri",
+    "url": "https://yassinedoghri.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yassinedoghri/codeigniter-altcha.git"
+  },
+  "scripts": {
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "commit": "cz"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "commitizen": "^4.3.1",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "prettier": "^3.6.2",
+    "semantic-release": "^24.2.7"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
