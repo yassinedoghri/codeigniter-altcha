@@ -94,4 +94,41 @@ class Altcha extends BaseConfig
      * @see https://altcha.org/docs/v2/complexity/
      */
     public int $challengeExpires = 10;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Obfuscation key
+     * --------------------------------------------------------------------------
+     *
+     * Main password to enter for revealing obfuscated data
+     *
+     * @see https://altcha.org/docs/v2/obfuscation/
+     */
+    public string $obfuscationKey = '';
+
+    /**
+     * --------------------------------------------------------------------------
+     * Obfuscation key
+     * --------------------------------------------------------------------------
+     *
+     * Whether or not to ask the user to enter the key for
+     * revealing the obfuscated data.
+     */
+    public bool $promptObfuscationKey = true;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Obfuscation max number
+     * --------------------------------------------------------------------------
+     *
+     * @see https://altcha.org/docs/v2/obfuscation/
+     */
+    public int $obfuscationMaxNumber = 10_000;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Obfuscation Payload TTL
+     * --------------------------------------------------------------------------
+     */
+    public int $obfuscationPayloadTTL = MONTH;
 }
