@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/yassinedoghri/codeigniter-altcha/compare/v1.1.0...v1.1.1) (2025-11-15)
+
+### Bug Fixes
+
+- **filter:** remove global declaration for ALTCHA filter + add section to add
+  it manually in README
+  ([c49a7c0](https://github.com/yassinedoghri/codeigniter-altcha/commit/c49a7c0fd08f635398ac6ecbb39ba2ef45b0ec34))
+
 ## [1.1.0](https://github.com/yassinedoghri/codeigniter-altcha/compare/v1.0.0...v1.1.0) (2025-11-12)
 
 ### Features
