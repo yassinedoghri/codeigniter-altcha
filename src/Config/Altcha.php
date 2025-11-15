@@ -8,28 +8,6 @@ use CodeIgniter\Config\BaseConfig;
 
 class Altcha extends BaseConfig
 {
-    public bool $active = true;
-
-    /**
-     * --------------------------------------------------------------------------
-     * ALTCHA filter excluded paths
-     * --------------------------------------------------------------------------
-     *
-     * Defines URI paths that should be ignored by the ALTCHA verification filter.
-     * Any request matching one of these patterns will bypass ALTCHA checks.
-     *
-     * Paths can be defined in two ways:
-     *   - As regular expressions.
-     *   - Using an asterisk (*) as a wildcard, which matches any characters
-     *     that follow. For example: 'api/*' excludes all routes under /api/.
-     *
-     *  Example:
-     *   ['api/*', 'health', '#^/internal/.*$#']
-     *
-     * @var list<string>
-     */
-    public array $filterExcludedPaths = [];
-
     /**
      * --------------------------------------------------------------------------
      * Altcha HMAC secret key

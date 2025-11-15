@@ -81,7 +81,22 @@ self-hosted CAPTCHA alternative with
    public $helpers = [/*...other helpers...*/, 'altcha'];
    ```
 
-3. Render the ALTCHA widget inside your forms using the `altcha_widget()`
+3. Enable ALTCHA's server-side verification filter globally in your
+   `app/Config/Filters.php` file:
+
+   ```php
+   public $globals = [
+       'before' => [
+           // ...
+           'altcha' => [
+             'except' => ['api*'] // discard paths for which you want to bypass the ALTCHA verification
+           ],
+       ],
+       // ...
+   ];
+   ```
+
+4. Render the ALTCHA widget inside your forms using the `altcha_widget()`
    helper:
 
    ```php
@@ -226,34 +241,12 @@ altcha_widget_obfuscate(string $data, array $attributes = [], ?string $customLab
 ## ⚙️ Config reference
 
 You may control the ALTCHA integration behavior in your CodeIgniter4 app if
-needed, including whether the verification is active, how HMAC secrets are
-managed, and how challenge parameters are tuned.
+needed, including how HMAC secrets are managed, and how challenge parameters are
+tuned.
 
 > [!NOTE]  
 > This library should be using sensible defaults, you should tweak things only
 > if the need arises.
-
-#### `active`
-
-Type: `boolean`
-
-Default: `true`
-
-Enables or disables ALTCHA verification globally. When set to false, the ALTCHA
-filter and server-side verification are bypassed for all requests.
-
-#### `filterExcludedPaths`
-
-Type: `list<string>` list of string patterns
-
-Default: `[]`
-
-Defines URI paths that bypass the ALTCHA verification filter.
-
-Supports asterisk wildcard at the end for prefix matching (e.g., `api/*` matches
-`/api/`, `/api/v1/users`, etc.).
-
-Example: `['api/*', 'health']` to exclude API subtrees, a health endpoint.
 
 #### `hmacKey`
 

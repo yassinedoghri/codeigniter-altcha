@@ -15,23 +15,9 @@ class Registrar
      */
     public static function Filters(): array
     {
-        /** @var Altcha $config */
-        $config = config('Altcha');
-
-        if (! $config->active) {
-            return [];
-        }
-
         return [
             'aliases' => [
                 'altcha' => AltchaFilter::class,
-            ],
-            'globals' => [
-                'before' => [
-                    'altcha' => [
-                        'except' => $config->filterExcludedPaths,
-                    ],
-                ],
             ],
         ];
     }
