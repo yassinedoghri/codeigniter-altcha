@@ -62,7 +62,7 @@
   },
   "require": {
     "php": ">=8.2",
-    "altcha-org/altcha": "^1.1.2"
+    "altcha-org/altcha": "^1.2.0"
   },
   "require-dev": {
     "codeigniter/phpstan-codeigniter": "^1.5.4",

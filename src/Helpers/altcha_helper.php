@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use AltchaOrg\Altcha\Obfuscator;
 use CodeIgniterAltcha\Config\Altcha;
 
 if (! function_exists('altcha_widget')) {
@@ -48,60 +49,18 @@ if (! function_exists('altcha_obfuscate_data')) {
      *
      * @param string $key encryption key shared with the client. Defaults to an empty string.
      */
-    function altcha_obfuscate_data(string $raw, ?string $key = null, ?bool $promptKey = null): string
+    function altcha_obfuscate_data(string $raw, string $key = ''): string
     {
-        /** @var Altcha $altchaConfig */
-        $altchaConfig = config('Altcha');
-
-        if ($key === null) {
-            $key = $altchaConfig->obfuscationKey;
-        }
-
-        if ($promptKey === null) {
-            $promptKey = $altchaConfig->promptObfuscationKey;
-        }
-
-        $cacheName = 'altcha-' . hash('md5', $raw . $key . ($promptKey ? '1' : '0'));
+        $cacheName = 'altcha-' . hash('md5', $raw . $key);
 
         /** @var string|null $obfuscatedData */
         $obfuscatedData = cache($cacheName);
         if ($obfuscatedData === null) {
-            $cipher = 'AES-256-GCM';
-            $keyHash = hash('sha256', $key, true);
-
-            $ivLength = openssl_cipher_iv_length($cipher);
-
-            // @phpstan-ignore identical.alwaysFalse
-            if ($ivLength === false) {
-                throw new RuntimeException('Getting cipher iv length failed.');
-            }
-
             /** @var Altcha $altchaConfig */
             $altchaConfig = config('Altcha');
 
-            // generate random iv little-endian bytes, num%256 per byte
-            $iv = '';
-            $num = random_int(0, $altchaConfig->obfuscationMaxNumber);
-            for ($i = 0; $i < $ivLength; $i++) {
-                $iv .= chr($num % 256);
-                $num = intdiv($num, 256);
-            }
-
-            $encryptedData = openssl_encrypt($raw, $cipher, $keyHash, OPENSSL_RAW_DATA, $iv, $tag);
-
-            if (! $encryptedData) {
-                throw new RuntimeException('Data encryption failed.');
-            }
-
-            $obfuscatedData = base64_encode($encryptedData . $tag);
-
-            if ($key !== '') {
-                if ($promptKey) {
-                    $obfuscatedData .= '?key=(prompt:Enter Password)';
-                } else {
-                    $obfuscatedData .= '?key=' . $key;
-                }
-            }
+            $obfuscator = new Obfuscator($altchaConfig->obfuscationMaxNumber);
+            $obfuscatedData = $obfuscator->obfuscateData($raw, $key);
 
             cache()
                 ->save($cacheName, $obfuscatedData, $altchaConfig->obfuscationPayloadTTL);
@@ -132,9 +91,28 @@ if (! function_exists('altcha_widget_obfuscate')) {
         array $attributes = [],
         ?string $customLabel = null,
         ?string $key = null,
-        ?bool $promptKey = null
+        ?bool $promptKey = null,
     ): string {
-        $obfuscatedData = altcha_obfuscate_data($data, $key, $promptKey);
+        /** @var Altcha $altchaConfig */
+        $altchaConfig = config('Altcha');
+
+        if ($key === null) {
+            $key = $altchaConfig->obfuscationKey;
+        }
+
+        if ($promptKey === null) {
+            $promptKey = $altchaConfig->promptObfuscationKey;
+        }
+
+        $obfuscatedData = altcha_obfuscate_data($data, $key);
+
+        if ($key !== '') {
+            if ($promptKey) {
+                $obfuscatedData .= '?key=(prompt)';
+            } else {
+                $obfuscatedData .= '?key=' . $key;
+            }
+        }
 
         if ($customLabel === null) {
             /** @var string $customLabel */
