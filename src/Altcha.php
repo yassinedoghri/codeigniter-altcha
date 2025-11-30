@@ -9,7 +9,6 @@ use AltchaOrg\Altcha\Challenge;
 use AltchaOrg\Altcha\ChallengeOptions;
 use AltchaOrg\Altcha\Hasher\Algorithm;
 use CodeIgniter\HTTP\IncomingRequest;
-use CodeIgniter\HTTP\Method;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Security\Exceptions\SecurityException;
 use CodeIgniterAltcha\Config\Altcha as ConfigAltcha;
@@ -48,7 +47,7 @@ class Altcha extends AltchaLib
     public function verifyRequest(IncomingRequest $request): self
     {
         // Verification during POST only
-        if ($request->getMethod() !== Method::POST) {
+        if ($request->getMethod() !== 'POST') {
             return $this;
         }
 
