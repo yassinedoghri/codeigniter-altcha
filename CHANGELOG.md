@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/yassinedoghri/codeigniter-altcha/compare/v1.1.2...v1.1.3) (2025-12-15)
+
+### Bug Fixes
+
+- **security:** update altcha-lib-php to v1.3.1
+  ([5f3ed92](https://github.com/yassinedoghri/codeigniter-altcha/commit/5f3ed92de8b66f1f0270dd2f0b4c380086e2b189))
+
 ## [1.1.2](https://github.com/yassinedoghri/codeigniter-altcha/compare/v1.1.1...v1.1.2) (2025-11-18)
 
 ### Internal
