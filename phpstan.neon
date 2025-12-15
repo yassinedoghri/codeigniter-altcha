@@ -13,4 +13,6 @@ parameters:
 		additionalServices:
 			- CodeIgniterAltcha\Config\Services
 	ignoreErrors:
-		- '#Call to an undefined method Pest\\PendingCalls\\TestCall\:\:expect\(\)#'
+		- 
+			message: '#Call to an undefined method Pest\\PendingCalls\\TestCall\:\:preset\(\)#'
+			path: tests/Arch/ArchTest.php

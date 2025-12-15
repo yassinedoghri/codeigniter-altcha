@@ -27,7 +27,6 @@ if (! function_exists('altcha_widget')) {
             }
 
             if (is_string($key)) {
-                // @phpstan-ignore-next-line binaryOp.invalid
                 $attr .= ' ' . $key . '="' . esc($value, 'attr') . '"';
             }
         }
