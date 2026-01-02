@@ -1,3 +1,12 @@
+## [1.1.4](https://github.com/yassinedoghri/codeigniter-altcha/compare/v1.1.3...v1.1.4) (2026-01-02)
+
+### Bug Fixes
+
+- return POST method directly
+  ([899fbcf](https://github.com/yassinedoghri/codeigniter-altcha/commit/899fbcf3469e2e70a7577ace9fd1163beaacb747))
+- use hardcoded 'POST' string instead of Method's class POST constant
+  ([f08f13b](https://github.com/yassinedoghri/codeigniter-altcha/commit/f08f13bd0ebf3e196e4d172ef90f0cb540303aaa))
+
 ## [1.1.3](https://github.com/yassinedoghri/codeigniter-altcha/compare/v1.1.2...v1.1.3) (2025-12-15)
 
 ### Bug Fixes
